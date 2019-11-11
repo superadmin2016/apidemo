@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RESTApiDemo.Models;
@@ -31,6 +32,12 @@ namespace RESTApiDemo.Controllers
     public IActionResult MyTeam()
     {
       return View();
+    }
+
+    [Authorize(AuthenticationSchemes = "oauth")]
+    public IActionResult Transcript(string userId)
+    {
+      return View("Transcripts", userId);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

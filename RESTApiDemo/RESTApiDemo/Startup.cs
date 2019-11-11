@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +26,24 @@ namespace RESTApiDemo
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+      services.AddAuthentication(opt =>
+      {
+        opt.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        opt.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        opt.DefaultChallengeScheme = "oauth";
+      })
+      .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+      .AddOAuth("oauth", opt =>
+      {
+        opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        opt.CallbackPath = new PathString("/signin-oauth");
+        opt.AuthorizationEndpoint = "https://au11sales.sumtotaldevelopment.net/apisecurity/connect/authorize";
+        opt.TokenEndpoint = "https://au11sales.sumtotaldevelopment.net/apisecurity/connect/token";
+        opt.Scope.Add("allapis");
+        opt.ClientId = "ubdemo2";
+        opt.ClientSecret = "1234567890";
+        opt.SaveTokens = true;
+      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +64,8 @@ namespace RESTApiDemo
 
       app.UseRouting();
 
+      app.UseCookiePolicy();
+      app.UseAuthentication();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>
