@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,6 +11,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using RESTApiDemo.Models;
 
 namespace RESTApiDemo
 {
@@ -25,6 +28,8 @@ namespace RESTApiDemo
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.Configure<Models.SumTotalSettings>(Configuration.GetSection("SumTotalSettings"));
+      var sumtSettings = Configuration.GetSection("SumTotalSettings").Get<SumTotalSettings>();
       services.AddControllersWithViews();
       services.AddAuthentication(opt =>
       {
@@ -37,11 +42,11 @@ namespace RESTApiDemo
       {
         opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         opt.CallbackPath = new PathString("/signin-oauth");
-        opt.AuthorizationEndpoint = "https://au11sales.sumtotaldevelopment.net/apisecurity/connect/authorize";
-        opt.TokenEndpoint = "https://au11sales.sumtotaldevelopment.net/apisecurity/connect/token";
+        opt.AuthorizationEndpoint = $"{ sumtSettings.BaseUrl }/apisecurity/connect/authorize";
+        opt.TokenEndpoint = $"{ sumtSettings.BaseUrl }/apisecurity/connect/token";
         opt.Scope.Add("allapis");
-        opt.ClientId = "ubdemo2";
-        opt.ClientSecret = "1234567890";
+        opt.ClientId = sumtSettings.ClientId;
+        opt.ClientSecret = sumtSettings.ClientSecret;
         opt.SaveTokens = true;
       });
     }
