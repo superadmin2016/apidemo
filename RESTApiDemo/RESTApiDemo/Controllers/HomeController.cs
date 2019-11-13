@@ -24,6 +24,28 @@ namespace RESTApiDemo.Controllers
     {
       _logger = logger;
       _sumtSettings = sumtSettings.Value;
+
+      //uncomment below to get client credentials access token
+      //var content = GetPayLoadForClientCredentials(_sumtSettings);
+      //HttpClient httpClient = new HttpClient();
+      //var rawResponse = httpClient.PostAsync($"{ _sumtSettings.BaseUrl }/apisecurity/connect/token", content).Result;
+      //JsonDocument jsonDoc = JsonDocument.Parse(rawResponse.Content.ReadAsStringAsync().Result);
+      //string accessToken = jsonDoc.RootElement.GetProperty("access_token").GetRawText();
+    }
+
+    private static HttpContent GetPayLoadForClientCredentials(SumTotalSettings settings)
+    {
+      var scope = "allapis";
+
+      var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
+      {
+        new KeyValuePair<string, string>("client_id", settings.ClientId_CC),
+        new KeyValuePair<string, string>("client_secret", settings.ClientSecret_CC),
+        new KeyValuePair<string, string>("scope", scope),
+        new KeyValuePair<string, string>("grant_type", "client_credentials"),
+      });
+
+      return content;
     }
 
     public IActionResult Index()
