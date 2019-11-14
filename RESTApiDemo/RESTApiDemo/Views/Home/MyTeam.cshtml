@@ -1,24 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "My Team";
+  ViewData["Title"] = "My Team";
 }
 
 <div class="text-center">
-    <h1 class="display-4">My Team</h1>
-    @*<ul class="list-inline">
+  <h1 class="display-4">My Team</h1>
+  @*<ul class="list-inline">
       <li><a asp-controller="Home" asp-action="Transcript" asp-route-userId="100002" asp-route-fullname="Emma Edison">Emma Edison</a></li>
       <li><a asp-controller="Home" asp-action="Transcript" asp-route-userId="100003" asp-route-fullname="Steven Martinson">Steven Martinson</a></li>
     </ul>*@
-<div class="row">
-  <div class="col box box-shadow text-left align-items-lg-start">
-    <img src="https://c412.sumtotaldemo.net/Core/DataStore/C412_PROD/Common/PersonImages/5GIRTNEUPQJ2DCG01GKV7K6V.png" class="rounded-circle" style="height:120px" alt="Emma Edision" />
-    <a asp-controller="Home" asp-action="Transcript" asp-route-userId="100002" asp-route-fullname="Emma Edison">Emma Edison</a>
+  <div class="row">
+    <div class="col box box-shadow text-left align-items-lg-start">
+      <div class="float-left">
+        <img src="https://c412.sumtotaldemo.net/Core/DataStore/C412_PROD/Common/PersonImages/5GIRTNEUPQJ2DCG01GKV7K6V.png" class="rounded-circle" style="height:120px" alt="Emma Edision" />
+      </div>
+      <div class="float-left">
+        <a asp-controller="Home" asp-action="Transcript" asp-route-userId="100002" asp-route-fullname="Emma Edison">Emma Edison</a><br />Account Executive<br /><i class="fa fa-fw fa-envelope-custom" aria-hidden="true"></i>eedison@organization.com
+      </div>
+    </div>
+    <div class="col-md-1">
+      &nbsp;
+    </div>
+    <div class="col box box-shadow text-left align-items-lg-start">
+      <div class="float-left">
+        <img src="https://c412.sumtotaldemo.net/Core/DataStore/C412_PROD/Common/PersonImages/P4IUSGF1SSUTM8001GKV7K6V.png" class="rounded-circle" style="height:120px" alt="Steven Martinson" />
+      </div>
+      <div class="float-left">
+        <a asp-controller="Home" asp-action="Transcript" asp-route-userId="100003" asp-route-fullname="Steven Martinson">Steven Martinson</a><br />Account Executive<br /><i class="fa fa-fw fa-envelope-custom" aria-hidden="true"></i>SMartison@organization.com
+      </div>
+    </div>
   </div>
-  <div class="col-md-1">
-    &nbsp;
-  </div>
-  <div class="col box box-shadow text-left align-items-lg-start">
-    <img src="https://c412.sumtotaldemo.net/Core/DataStore/C412_PROD/Common/PersonImages/P4IUSGF1SSUTM8001GKV7K6V.png" class="rounded-circle" style="height:120px" alt="Steven Martinson" />
-    <a asp-controller="Home" asp-action="Transcript" asp-route-userId="100003" asp-route-fullname="Steven Martinson">Steven Martinson</a>
-  </div>
-</div>
 </div>
