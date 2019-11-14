@@ -6,6 +6,17 @@
     <title>@ViewData["Title"] - RESTApiDemo</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script type="text/javascript">
+      function redirectOnEnter(e) {
+        if (e.keyCode == 13) {
+          redirectToSearch();
+        }
+        return false;
+      }
+      function redirectToSearch() {
+        document.location.href = "/home/search?searchText=" + document.getElementById('searchText').value;
+      }
+    </script>
 </head>
 <body>
     <header>
@@ -27,6 +38,10 @@
                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="MyTeam">My Team</a>
               </li>
             </ul>
+          </div>
+          <div>
+            <input type="text" size="20" id="searchText" onkeypress="javascript:redirectOnEnter(event);"/>
+            <button type="submit" class="btn-primary" onclick="javascript:redirectToSearch()">Search</button>
           </div>
           </div>
 </nav>

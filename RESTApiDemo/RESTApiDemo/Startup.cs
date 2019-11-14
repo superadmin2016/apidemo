@@ -49,6 +49,7 @@ namespace RESTApiDemo
         opt.ClientSecret = sumtSettings.ClientSecret;
         opt.SaveTokens = true;
       });
+      services.AddMemoryCache();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

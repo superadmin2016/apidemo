@@ -1,0 +1,41 @@
+﻿@model RESTApiDemo.Models.ActivitySearchResponse
+@using Microsoft.Extensions.Options
+@inject IOptions<SumTotalSettings> sumtOptions
+@{
+  ViewData["Title"] = "Transcripts Page";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Search Results</h1>
+  Showing page @(Model.pagination.offset +1 ) (size @(Model.pagination.limit)) of total @Model.pagination.total results.
+</div>
+
+<div>
+
+  <div>
+    <table class="table table-striped">
+      <tr>
+        <th>
+          Activity Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Description
+        </th>
+      </tr>
+      @foreach (var activity in this.Model.data)
+      {
+        <tr>
+          <td><a href="@(sumtOptions.Value.BaseUrl)/core/pillarRedirect?relyingParty=LM&url=app%2Fcore%2Flearneractivitysummary%2FGetActivitySummary%3FisPopup%3D0%26GroupMode%3D1%26DispMode%3D0%26id%3D@(activity.activityId)%26UserMode%3Dundefined">@activity.name</a></td>
+          <td>@activity.activityType</td>
+          <td>@activity.description</td>
+        </tr>
+      }
+    </table>
+
+  </div>
+  <a data-toggle="collapse" class="btn btn-primary" href="#rawresponse">Raw Response</a>
+  <div style="width: 100%; overflow: scroll;" class="collapse" id="rawresponse"><pre>@Html.Raw(ViewData["RawResponse"])</pre></div>
+</div>

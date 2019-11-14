@@ -1,8 +1,36 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+  <h1 class="display-4">Welcome</h1>
+  <div class="row align-items-center">
+    <div class="col box">
+      Activities <br />@ViewData["ActivityCount"]
+    </div>
+
+
+    <div class="col-md-1">
+      &nbsp;
+    </div>
+    <div class="col box">Employees<br />@ViewData["EmployeeCount"]</div>
+  </div>
+  <p></p>
 </div>
+@*<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gridstack@0.5.1/dist/gridstack.all.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@0.5.1/dist/gridstack.min.css" />
+
+  <div class="grid-stack">
+    <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">
+      <div class="grid-stack-item-content badge-dark">my first widget</div>
+    </div>
+    <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
+      <div class="grid-stack-item-content badge-dark">another widget!</div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $('.grid-stack').gridstack();
+  </script>*@
