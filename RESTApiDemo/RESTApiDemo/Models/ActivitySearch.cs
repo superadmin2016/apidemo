@@ -19,5 +19,16 @@ namespace RESTApiDemo.Models
     public string name { get; set; }
     public string description { get; set; }
     public string activityType { get; set; }
+
+    public string activityImageUrl { get; set; }
+
+    public string getActivityImageUrl(string baseUrl, string tenantKey)
+        {
+            if (activityImageUrl.StartsWith("data"))
+            {
+                return baseUrl + "/learning/DataStore/" + tenantKey + "/Learning/" + activityImageUrl;
+            }
+            return activityImageUrl;
+        }
   }
 }

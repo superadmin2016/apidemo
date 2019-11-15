@@ -31,6 +31,7 @@ namespace RESTApiDemo.Controllers
     [Authorize(AuthenticationSchemes = "oauth")]
     public async Task<IActionResult> Index()
     {
+      //Get the count of employees using pagination on B2B APIs.
       var client = new HttpClient();
       client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GetSumTotalAPIB2BAccessToken());
       string apiUrl = $"{ _sumtSettings.BaseUrl }/apis/api/v1/users?limit=1";
@@ -39,6 +40,7 @@ namespace RESTApiDemo.Controllers
       JsonDocument jsonDoc = JsonDocument.Parse(response.Content.ReadAsStringAsync().Result);
       ViewData["EmployeeCount"] = jsonDoc.RootElement.GetProperty("pagination").GetProperty("total").GetInt32();
 
+      //Get the count of activities using pagination of user context APIs.
       string accessToken = HttpContext.GetTokenAsync("access_token").Result ?? "No Data";
       client = new HttpClient();
       client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);

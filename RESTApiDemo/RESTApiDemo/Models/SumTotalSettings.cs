@@ -9,6 +9,8 @@ namespace RESTApiDemo.Models
   {
     public string BaseUrl { get; set; }
 
+    public string TenantKey { get; set; }
+
     public string ClientId { get; set; }
 
     public string ClientSecret { get; set; }
